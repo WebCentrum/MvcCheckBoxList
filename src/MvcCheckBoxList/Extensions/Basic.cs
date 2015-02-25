@@ -180,7 +180,7 @@ public static partial class Extensions {
   /// <param name="textToDisplayExpr">Data list value type to be used as checkbox 'Text'</param>
   /// <param name="selectedValuesExpr">Data list of selected items (should be of same data type as a source list)</param>
   /// <param name="position">Direction of the list (e.g. 'Position2.Horizontal' or 'Position2.Vertical')</param>
-  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox/label combo if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
+  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
   /// <returns>HTML string containing checkbox list</returns>
   public static MvcHtmlString CheckBoxListFor<TModel, TProperty, TItem, TValue, TKey>
     (this HtmlHelper<TModel> htmlHelper,
@@ -221,7 +221,7 @@ public static partial class Extensions {
   /// <param name="textToDisplayExpr">Data list value type to be used as checkbox 'Text'</param>
   /// <param name="selectedValueExpr">Boolean value from db or selector corresponding to each item to be selected</param>
   /// <param name="position">Direction of the list (e.g. 'Position2.Horizontal' or 'Position2.Vertical')</param>
-  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox/label combo if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
+  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
   /// <returns>HTML string containing checkbox list</returns>
   public static MvcHtmlString CheckBoxListFor<TModel, TProperty, TItem, TValue, TKey>
     (this HtmlHelper<TModel> htmlHelper,
@@ -264,10 +264,10 @@ public static partial class Extensions {
   /// <param name="valueExpr">Data list value type to be used as checkbox 'Value'</param>
   /// <param name="textToDisplayExpr">Data list value type to be used as checkbox 'Text'</param>
   /// <param name="selectedValuesExpr">Data list of selected items (should be of same data type as a source list)</param>
-  /// <param name="htmlAttributes">Applies custom HTML tag attributes to each checkbox/label combo</param>
+  /// <param name="htmlAttributes">Applies custom HTML tag attributes to each checkbox</param>
   /// <param name="disabledValues">String array of values to disable</param>
   /// <param name="position">Direction of the list (e.g. 'Position2.Horizontal' or 'Position2.Vertical')</param>
-  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox/label combo if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
+  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
   /// <returns>HTML string containing checkbox list</returns>
   public static MvcHtmlString CheckBoxListFor<TModel, TProperty, TItem, TValue, TKey>
     (this HtmlHelper<TModel> htmlHelper,
@@ -311,10 +311,10 @@ public static partial class Extensions {
   /// <param name="valueExpr">Data list value type to be used as checkbox 'Value'</param>
   /// <param name="textToDisplayExpr">Data list value type to be used as checkbox 'Text'</param>
   /// <param name="selectedValueExpr">Boolean value from db or selector corresponding to each item to be selected</param>
-  /// <param name="htmlAttributes">Applies custom HTML tag attributes to each checkbox/label combo</param>
+  /// <param name="htmlAttributes">Applies custom HTML tag attributes to each checkbox</param>
   /// <param name="disabledValues">String array of values to disable</param>
   /// <param name="position">Direction of the list (e.g. 'Position2.Horizontal' or 'Position2.Vertical')</param>
-  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox/label combo if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
+  /// <param name="htmlAttributesExpr">Applies custom HTML tag attributes to each checkbox if defined locally (e.g.: entity => new { tagName = "tagValue" }), or to particular combos, if defined in the database (e.g.: entity => entity.TagsDbObject)</param>
   /// <returns>HTML string containing checkbox list</returns>
   public static MvcHtmlString CheckBoxListFor<TModel, TProperty, TItem, TValue, TKey>
     (this HtmlHelper<TModel> htmlHelper,

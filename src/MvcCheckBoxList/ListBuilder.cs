@@ -33,9 +33,11 @@ namespace MvcCheckBoxList.Library {
          lc.valueExpr,
          lc.textToDisplayExpr,
          lc.htmlAttributesExpr,
+         lc.htmlAttributesDivExpr,
          lc.selectedValuesExpr,
          lc.selectedValueExpr,
          lc.htmlAttributes,
+         lc.htmlAttributesDiv,
          lc.htmlListInfo,
          lc.disabledValues,
          lc.position);
@@ -70,9 +72,11 @@ namespace MvcCheckBoxList.Library {
        Expression<Func<TItem, TValue>> valueExpr,
        Expression<Func<TItem, TKey>> textToDisplayExpr,
        Expression<Func<TItem, object>> htmlAttributesExpr,
+       Expression<Func<TItem, object>> htmlAttributesDivExpr,
        Expression<Func<TModel, IEnumerable<TItem>>> selectedValuesExpr,
        Expression<Func<TItem, bool>> selectedValueExpr,
        object htmlAttributes,
+       object htmlAttributesDiv,
        HtmlListInfo htmlListInfo,
        string[] disabledValues,
        Position position = Position.Horizontal) {
@@ -156,12 +160,15 @@ namespace MvcCheckBoxList.Library {
         // get a dictionary of html attributes
         var htmlAttributesForCheckBox =
           item.getHtmlAttributes(htmlAttributes, htmlAttributesExpr);
+        var htmlAttributesForDiv =
+          item.getHtmlAttributes(htmlAttributesDiv, htmlAttributesDivExpr);
 
         // create checkbox element
         sb = _createCheckBoxListElement
           (sb, htmlHelper, modelMetadata, htmlWrapper, htmlAttributesForCheckBox,
            selectedValues, itemIsSelected, disabledValues, listName, itemValue,
-           itemText, textLayout);
+           itemText, htmlListInfo == null ? false : htmlListInfo.WrapInDiv,
+           htmlAttributesForDiv, textLayout);
       }
       sb.Append(htmlWrapper.wrap_close);
 
@@ -286,8 +293,19 @@ namespace MvcCheckBoxList.Library {
       (StringBuilder sb, HtmlHelper htmlHelper, ModelMetadata modelMetadata,
       htmlWrapperInfo htmlWrapper, IDictionary<string, object> htmlAttributesForCheckBox, 
       List<string> selectedValues, string itemIsSelected, 
-      IEnumerable<string> disabledValues, string name, string itemValue, 
-      string itemText, TextLayout textLayout) {
+      IEnumerable<string> disabledValues, string name, string itemValue,
+      string itemText, bool wrapInDiv, IDictionary<string, object> htmlAttributesForDiv,
+      TextLayout textLayout)
+    {
+        // wrap in div
+        TagBuilder div_builder = null;
+        if (wrapInDiv)
+        {
+            div_builder = new TagBuilder("div");
+            div_builder.MergeAttributes(htmlAttributesForDiv.toDictionary());
+            sb.Append(div_builder.ToString(TagRenderMode.StartTag));
+        }
+
       // get full name from view model
       var fullName = htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(name);
 
@@ -309,7 +327,8 @@ namespace MvcCheckBoxList.Library {
       checkbox_builder.GenerateId(link_name);
       var linked_label_builder = new TagBuilder("label");
       linked_label_builder.MergeAttribute("for", link_name.Replace(".", "_"));
-      linked_label_builder.MergeAttributes(htmlAttributesForCheckBox.toDictionary());
+      /*if (!wrapInDiv)
+          linked_label_builder.MergeAttributes(htmlAttributesForCheckBox.toDictionary());*/
       linked_label_builder.InnerHtml = itemText;
 
       // if there are any errors for a named field, we add the css attribute
@@ -374,6 +393,9 @@ namespace MvcCheckBoxList.Library {
         sb.Append(htmlWrapper.wrap_rowbreak);
         htmlwrap_rowbreak_counter = 0;
       }
+
+      if (div_builder != null)
+          sb.Append(div_builder.ToString(TagRenderMode.EndTag));
 
       // return string builder with checkbox html markup
       return sb;

@@ -7,19 +7,23 @@ public class HtmlListInfo {
     int columns = 0,
     object htmlAttributes = null,
     TextLayout textLayout = TextLayout.Default,
-    TemplateIsUsed templateIsUsed = TemplateIsUsed.No) {
+    TemplateIsUsed templateIsUsed = TemplateIsUsed.No,
+    bool wrapInDiv = false)
+    {
 
     this.htmlTag = htmlTag;
     Columns = columns;
     this.htmlAttributes = htmlAttributes;
     TextLayout = textLayout;
     TemplateIsUsed = templateIsUsed;
+    WrapInDiv = wrapInDiv;
   }
 
   public HtmlTag htmlTag { get; set; }
 	public int Columns { get; set; }
 	public object htmlAttributes { get; set; }
   public TextLayout TextLayout { get; set; }
+  public bool WrapInDiv { get; set; }
 
   /// <summary>
   /// Allows to use user-defined html template for checkbox text.
